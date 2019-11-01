@@ -1,5 +1,7 @@
-#ifdef STDR_LINE_FOLLOWING
+#ifndef STDR_LINE_FOLLOWING
 #define STDR_LINE_FOLLOWING
+
+#define PI 3.14159265358979323846
 
 #include <iostream>
 #include <cstdlib>
@@ -17,7 +19,7 @@
 #include <sensor_msgs/LaserScan.h>
 #include <sensor_msgs/Range.h>
 
-namespace assignment_2
+namespace line_following_robot
 {
     class LineFollowing
     {
