@@ -1,4 +1,4 @@
-CMakeList.txt
+CMakeLists.txt
 .vscode
 .idea
 .catkin_workspace
