@@ -8,12 +8,11 @@ Project developed for the MIEIC ROBO curricular unit
 - [Configure the catkin workspace](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment#Create_a_ROS_Workspace);
 - [Install the STDR from Github](http://wiki.ros.org/stdr_simulator/Tutorials/Set%20up%20STDR%20Simulator#Get_STDR_Simulator_from_Github) and not from the apt packages as they are not up to date;
 - Download this repository and save its files in *~/catkin_ws/src/*;
-- Copy the files in *line_following_robot/stdr_files/* to the *stdr_simulator* package
+- Run the setup script
 
 ```sh
     cd ~/catkin_ws/src/
-    cp line_following_robot/stdr_files/stdr_launchers/launch/line-following-robot.launch stdr_simulator/stdr_launchers/launch
-    cp line_following_robot/stdr_files/stdr_resources/resources/robots/robot.* stdr_simulator/stdr_resources/resources/robots/
+    sh setup.sh
 ```
 
 - Build the package
