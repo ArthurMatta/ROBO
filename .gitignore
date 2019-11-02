@@ -2,3 +2,4 @@
 .idea
 .catkin_workspace
 stdr_simulator/
+./CMakeLists.txt
