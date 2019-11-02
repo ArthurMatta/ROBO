@@ -2,3 +2,4 @@ CMakeLists.txt
 .vscode
 .idea
 .catkin_workspace
+stdr_simulator/
