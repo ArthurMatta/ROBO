@@ -41,4 +41,4 @@ namespace line_following_robot
     };
 }
 
-#endif STDR_LINE_FOLLOWING
+#endif

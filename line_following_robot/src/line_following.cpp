@@ -1,4 +1,4 @@
-#include "../lib/line_following.h"
+#include "../include/line_following.h"
 
 using namespace std;
 
@@ -13,14 +13,14 @@ namespace line_following_robot
     LineFollowing::LineFollowing(int argc, char **argv){
         if (argc != 3)
         {
-            ROS_ERROR("Usage: line_following_robot <robot_id> <laser_id>");
+            ROS_ERROR("Usage: robot_linefollow_node <robot_id> <laser_id>");
             exit(-1);
         }
 
         laser_topic = string("/") + string(argv[1]) + string("/") + string(argv[2]);
         speeds_topic = string("/") + string(argv[1]) + string("/cmd_vel");
         subscriber = n.subscribe(laser_topic.c_str(), 1, &LineFollowing::callback, this);
-        cmd_vel_pub = n.advertise<geometry_msgs::Twist>(speeds_topic.c_str, 1);
+        cmd_vel_pub = n.advertise<geometry_msgs::Twist>(speeds_topic.c_str(), 1);
     }
 
     /**
