@@ -1,0 +1,1 @@
+cp -r ~/catkin_ws/src/line_following_robot/stdr_files/* ~/catkin_ws/src/stdr_simulator
