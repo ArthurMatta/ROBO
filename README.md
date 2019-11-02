@@ -27,7 +27,7 @@ Project developed for the MIEIC ROBO curricular unit
 - Open a terminal and run the command
 
 ```sh
-    roslaunch stdr_launchers line-following-robot.launch
+    roslaunch stdr_launchers linefollowing_V.launch
 ```
 
 This command should open a windows displaying a map and a robot.
