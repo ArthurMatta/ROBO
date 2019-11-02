@@ -37,82 +37,86 @@ namespace line_following_robot
     void LineFollowing::callback(const sensor_msgs::LaserScan& msg){
         scan = msg;
         geometry_msgs::Twist cmd;
+
+        // Set distances as maximum value
         map<string, float> distances;
         distances.insert(make_pair("Front", numeric_limits<float>::max()));
         distances.insert(make_pair("Left", numeric_limits<float>::max()));
         distances.insert(make_pair("Right", numeric_limits<float>::max()));
-        float robotAngle = 0.0;
-        float distance;
-        float angle;
+
+        // Robot parameters
+        float robotAngle;
+        float robotDistance;
         float alpha;
-        float turningAngle = 0;
+
+        // Sensor parameters
+        float sensorDistance;
+        float sensorAngle;
+
+        // Constants
         const float K = 15;
         const float idealDistance = 1.5;
 
         for (size_t i = 0; i < scan.ranges.size(); i++)
         {
-            distance = scan.ranges[i];
-            angle = Rad2Deg(scan.angle_min) + Rad2Deg(scan.angle_increment) * i;
+            sensorDistance = scan.ranges[i];
+            sensorAngle = Rad2Deg(scan.angle_min) + Rad2Deg(scan.angle_increment) * i;
 
-            // Front
-            if (angle >= -15 && angle <= 15)
+            // Frontal sensors
+            if (sensorAngle >= -15 && sensorAngle <= 15)
             {
-                if (distance < distances["Front"])
+                if (sensorDistance < distances["Front"])
                 {
-                    distances["Front"] = distance;
+                    distances["Front"] = sensorDistance;
                 }
             }
-            // Left side
-            if (angle >= 0 && angle <= 120)
+            // Left side sensors
+            else if (sensorAngle > 15 && sensorAngle <= 100)
             {
-                if (distance < distances["Left"])
+                if (sensorDistance < distances["Left"])
                 {
-                    robotAngle = angle;
-                    distances["Left"] = distance;
+                    robotAngle = sensorAngle;
+                    distances["Left"] = sensorDistance;
                 }
             }
-            // Right side
-            else if (angle >= -120 && angle <= 0)
+            // Right side sensors
+            else if (sensorAngle >= -100 && sensorAngle < -15)
             {
-                if (distance < distances["Right"])
+                if (sensorDistance < distances["Right"])
                 {
-                    robotAngle = angle;
-                    distances["Right"] = distance;
+                    robotAngle = sensorAngle;
+                    distances["Right"] = sensorDistance;
                 }
             }
         }
 
-        distance = min(distances["Left"], distances["Right"]);
+        robotDistance = min(distances["Left"], distances["Right"]);
         alpha = 90.0 - abs(robotAngle);
     
-        // Within sensor's range
-        if (distance <= scan.range_max)
+        // Wall is within sensor's range
+        if (robotDistance <= scan.range_max)
         {
             cout << "========== Walking ==========" << endl
-                 << "Distance from wall = " << distance << endl
+                 << "Distance from wall = " << robotDistance << endl
                  << "Alpha = " << alpha << endl;
 
             cmd.linear.x = 0.5;
-            cmd.angular.z = -K * (sin(Deg2Rad(alpha)) - (distance - idealDistance)) * cmd.linear.x;
+            cmd.angular.z = -K * (sin(Deg2Rad(alpha)) - (robotDistance - idealDistance)) * cmd.linear.x;
         }
         // Initial movement
         else
         {
            cmd.linear.x = 0.5;
-           cmd.angular.z = 0.0; 
+           cmd.angular.z = 0.0;
         }
         
         if (distances["Front"] <= idealDistance &&
             distances["Left"] < scan.range_max &&
             distances["Right"] < scan.range_max)
         {
-            cout << "========= Stoping ==========" << endl
-                << "Distances:" << endl
-                << "Front = " << distances["Front"] << endl
-                << "Left = " << distances["Left"] << endl
-                << "Right = " << distances["Right"] << endl;
-            cmd.linear.x = 0.0;
-            cmd.angular.z = 0.0;
+            cout << "========== Cornering ==========" << endl;
+            cmd.linear.x = 0.1;
+            cmd.angular.z = -K * (sin(Deg2Rad(alpha)) - (robotDistance - idealDistance)) * cmd.linear.x;
         }
 
         // Send movement command
