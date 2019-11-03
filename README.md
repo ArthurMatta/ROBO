@@ -24,13 +24,15 @@ Project developed for the MIEIC ROBO curricular unit
 
 ## Running the Program
 
-- Open a terminal and run the command
+- Open a terminal and run one of the commands bellow
 
 ```sh
-    roslaunch stdr_launchers linefollowing_V.launch
+    roslaunch stdr_launchers linefollowing_V.launch // For a V-shaped map
+    roslaunch stdr_launchers linefollowing_W.launch // For a W-shaped map
+    roslaunch stdr_launchers linefollowing_W2.launch // For a hollow W-shaped map
 ```
 
-This command should open a windows displaying a map and a robot.
+These commands should open a window displaying a map and a robot.
 
 - In another terminal run the command
 
