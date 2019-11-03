@@ -56,6 +56,7 @@ namespace line_following_robot
         // Constants
         const float K = 15;
         const float idealDistance = 1.0;
+        const float linearSpeed = 0.5;
 
         for (size_t i = 0; i < scan.ranges.size(); i++)
         {
@@ -101,7 +102,7 @@ namespace line_following_robot
                  << "Wall distance = " << robotDistance << "m" << endl
                  << "Alpha = " << alpha << endl;
 
-            cmd.linear.x = 0.5;
+            cmd.linear.x = linearSpeed;
             cmd.angular.z = -K * (sin(Deg2Rad(alpha)) - (robotDistance - idealDistance)) * cmd.linear.x;
         }
         // Initial movement
@@ -112,7 +113,7 @@ namespace line_following_robot
                  << "Wall distance = " << robotDistance << "m" << endl
                  << "Alpha = " << alpha << endl;
 
-            cmd.linear.x = 0.5;
+            cmd.linear.x = linearSpeed;
             cmd.angular.z = 0.0;
         }
         
