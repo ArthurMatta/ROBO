@@ -37,7 +37,7 @@ These commands should open a window displaying a map and a robot.
 - In another terminal run the command
 
 ```sh
-    rosrun line_following_robot robot_linefollow_node robot0 laser_0
+    rosrun assignment_2 robot_linefollow_node robot0 laser_0
 ```
 
 This command should apply the movement logic to the robot.
