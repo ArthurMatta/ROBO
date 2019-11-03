@@ -29,7 +29,7 @@ Project developed for the MIEIC ROBO curricular unit
 ```sh
     roslaunch stdr_launchers linefollowing_V.launch // For a V-shaped map
     roslaunch stdr_launchers linefollowing_W.launch // For a W-shaped map
-    roslaunch stdr_launchers linefollowing_W2.launch // For a hollow W-shaped map
+    roslaunch stdr_launchers linefollowing_HW.launch // For a hollow W-shaped map
     roslaunch stdr_launchers linefollowing_C.launch // For a C-shaped map
 ```
 
