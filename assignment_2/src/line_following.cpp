@@ -96,8 +96,9 @@ namespace line_following_robot
         // Wall is within sensor's range
         if (robotDistance <= scan.range_max)
         {
-            cout << "========== Walking ==========" << endl
-                 << "Distance from wall = " << robotDistance << endl
+            cout << "====================" << endl
+                 << "Action = Walking" << endl
+                 << "Wall distance = " << robotDistance << "m" << endl
                  << "Alpha = " << alpha << endl;
 
             cmd.linear.x = 0.5;
@@ -106,15 +107,23 @@ namespace line_following_robot
         // Initial movement
         else
         {
-           cmd.linear.x = 0.5;
-           cmd.angular.z = 0.0;
+            cout << "====================" << endl
+                 << "Action = Wandering" << endl
+                 << "Wall distance = " << robotDistance << "m" << endl
+                 << "Alpha = " << alpha << endl;
+
+            cmd.linear.x = 0.5;
+            cmd.angular.z = 0.0;
         }
         
         if (distances["Front"] <= idealDistance &&
             distances["Left"] < scan.range_max &&
             distances["Right"] < scan.range_max)
         {
-            cout << "========== Cornering ==========" << endl;
+            cout << "====================" << endl
+                 << "Action = Cornering" << endl
+                 << "Wall distance = " << robotDistance << "m" << endl
+                 << "Alpha = " << alpha << endl;
             cmd.linear.x = 0.1;
             cmd.angular.z = -K * (sin(Deg2Rad(alpha)) - (robotDistance - idealDistance)) * cmd.linear.x;
         }
