@@ -55,7 +55,7 @@ namespace line_following_robot
 
         // Constants
         const float K = 15;
-        const float idealDistance = 1.5;
+        const float idealDistance = 1.0;
 
         for (size_t i = 0; i < scan.ranges.size(); i++)
         {

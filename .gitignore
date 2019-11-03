@@ -3,3 +3,5 @@
 .catkin_workspace
 stdr_simulator/
 CMakeLists.txt
+
+!/assignment_2/CMakeLists.txt
