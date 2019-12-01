@@ -1,0 +1,8 @@
+prefix=/home/parallels/Documents/FEUP/ROBO/Ass34/install
+
+Name: cat_description
+Description: Description of cat_description
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/parallels/Documents/FEUP/ROBO/Ass34/install/lib 
+Requires: gazebo_ros

@@ -1,0 +1,8 @@
+prefix=/home/parallels/Documents/FEUP/ROBO/Assignment_2/devel
+
+Name: assignment_2
+Description: Description of assignment_2
+Version: 1.0.0
+Cflags: 
+Libs: -L/home/parallels/Documents/FEUP/ROBO/Assignment_2/devel/lib 
+Requires: roscpp tf stdr_msgs geometry_msgs sensor_msgs nav_msgs

@@ -1,0 +1,8 @@
+prefix=/home/parallels/Documents/FEUP/ROBO/Assignment_2/devel
+
+Name: stdr_launchers
+Description: Description of stdr_launchers
+Version: 0.3.2
+Cflags: 
+Libs: -L/home/parallels/Documents/FEUP/ROBO/Assignment_2/devel/lib 
+Requires: 

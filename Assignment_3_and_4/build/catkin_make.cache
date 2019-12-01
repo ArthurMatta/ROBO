@@ -1,0 +1,2 @@
+cat_description:cat_gazebo
+-DCATKIN_DEVEL_PREFIX=/home/parallels/Documents/FEUP/ROBO/Ass34/devel -DCMAKE_INSTALL_PREFIX=/home/parallels/Documents/FEUP/ROBO/Ass34/install -G Unix Makefiles

@@ -1,0 +1,8 @@
+prefix=/home/parallels/Documents/FEUP/ROBO/Ass34/devel
+
+Name: rrbot_control
+Description: Description of rrbot_control
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/parallels/Documents/FEUP/ROBO/Ass34/devel/lib 
+Requires: 
