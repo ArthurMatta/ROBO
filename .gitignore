@@ -4,11 +4,11 @@
 */
 **/*
 
-!Assignment_2/Deliverables/**/*
-!Assignment_2/README.md
-!Assignment_2/setup.sh
-!Assignment_2/src/assignment_2/**/*
-!Assignment_3_and_4/src/cat_description/**/*
-!Assignment_3_and_4/src/cat_gazebo/**/*
-!Assignment_3_and_4/README.md
-!LICENSE
+!./Assignment_2/Deliverables/**/*
+!./Assignment_2/README.md
+!./Assignment_2/setup.sh
+!./Assignment_2/src/assignment_2/**/*
+!./Assignment_3_and_4/src/cat_description/**/*
+!./Assignment_3_and_4/src/cat_gazebo/**/*
+!./Assignment_3_and_4/README.md
+!./LICENSE
