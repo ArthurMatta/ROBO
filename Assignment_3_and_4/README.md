@@ -12,7 +12,7 @@ To that end, two robots were developed using the Robotic Operational System (ROS
 - [Configure the catkin workspace](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment#Create_a_ROS_Workspace);
 - [Install Gazebo](http://gazebosim.org/tutorials?cat=install);
 - [Install gazebo_ros package](http://gazebosim.org/tutorials?tut=ros_installing&cat=connect_ros);
-- Donwload this repository and move the contents of *Assignment_3_and_4* folder into the *catkin_ws/src* folder. Your folder structure should be something like this:
+- Donwload this repository and move the contents of *Assignment_3_and_4* folder into the *catkin_ws* folder. Your folder structure should be something like this:
 ```
 catkin_ws/
    build/
@@ -25,4 +25,8 @@ catkin_ws/
       cat_gazebo/
       CMakeLists.txt
    ...
+```
 
+## Running the Program
+
+TBA
