@@ -1,5 +1,5 @@
 # ROBO
-Projects developed for the MIEIC ROBO curricular unit
+Projects developed for the MIEIC ROBO curricular unit (2019/20)
 
 ## [Assignment 2](https://github.com/ArthurMatta/ROBO/tree/master/Assignment_2)
  
