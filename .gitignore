@@ -5,17 +5,19 @@
 !README.md
 !LICENSE
 
+!/Assignment_2
+/Assignment_2/*
 !/Assignment_2/Report.pdf
 !/Assignment_2/README.md
 !/Assignment_2/setup.sh
-/Assignment_2/*
 !/Assignment_2/src
 /Assignment_2/src/*
 !/Assignment_2/src/assignment_2
 
-!/Assignment_3_and_4/README.md
-!/Assignment_3_and_4/Report.md
+!/Assignment_3_and_4
 /Assignment_3_and_4/*
+!/Assignment_3_and_4/README.md
+!/Assignment_3_and_4/Report.pdf
 !/Assignment_3_and_4/src
 /Assignment_3_and_4/src/*
 !/Assignment_3_and_4/src/cat_description
