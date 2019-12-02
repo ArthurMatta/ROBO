@@ -13,12 +13,10 @@ find_package(catkin REQUIRED COMPONENTS
 set(CMAKE_BUILD_TYPE Release)
 
  include_directories(
-#  include
   ${catkin_INCLUDE_DIRS}
 )
 
 catkin_package(
-#  INCLUDE_DIRS include
   LIBRARIES
   CATKIN_DEPENDS
     roscpp
