@@ -8,4 +8,21 @@ To that end, two robots were developed using the Robotic Operational System (ROS
 
 ## Pre-requisites & Setup
 
-In order to execute the game it's necessary to have ROS (melodic version) and Gazebo (gazebo and gazebo_ros packages) installed. The installation guide for ros, gazebo and gazebo_ros packages can be found [here](http://wiki.ros.org/melodic/Installation), [here](http://gazebosim.org/tutorials?cat=install), and [here](http://gazebosim.org/tutorials?tut=ros_installing&cat=connect_ros) respectively.
+- [Install ROS melodic](http://wiki.ros.org/melodic/Installation);
+- [Configure the catkin workspace](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment#Create_a_ROS_Workspace);
+- [Install Gazebo](http://gazebosim.org/tutorials?cat=install);
+- [Install gazebo_ros package](http://gazebosim.org/tutorials?tut=ros_installing&cat=connect_ros);
+- Donwload this repository and move the contents of *Assignment_3_and_4* folder into the *catkin_ws/src* folder. Your folder structure should be something like this:
+```
+catkin_ws/
+   build/
+      ...
+   devel/
+      setup.bash
+      ...
+   src/
+      cat_description/
+      cat_gazebo/
+      CMakeLists.txt
+   ...
+
