@@ -8,4 +8,4 @@ To that end, two robots were developed using the Robotic Operational System (ROS
 
 ## Pre-requisites & Setup
 
-In order to execute the game it's necessary to have ROS (melodic version) and Gazebo (gazebo and gazebo_ros packages) installed. The installation guide for ros, gazebo and gazebo_ros packages can be found (here)[http://wiki.ros.org/melodic/Installation], (here)[http://gazebosim.org/tutorials?cat=install], and (here)[http://gazebosim.org/tutorials?tut=ros_installing&cat=connect_ros] respectively.
+In order to execute the game it's necessary to have ROS (melodic version) and Gazebo (gazebo and gazebo_ros packages) installed. The installation guide for ros, gazebo and gazebo_ros packages can be found [here](http://wiki.ros.org/melodic/Installation), [here](http://gazebosim.org/tutorials?cat=install), and [here](http://gazebosim.org/tutorials?tut=ros_installing&cat=connect_ros) respectively.
