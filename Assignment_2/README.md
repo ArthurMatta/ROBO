@@ -1,12 +1,12 @@
 # Assignment 2
 
-Project developed for the MIEIC ROBO curricular unit
+This is the repository for Assignment 2 of the Robotics curricular unit at FEUP. 
 
 ## Goal
 
 The goal of this project is to develop a robot capable of following an angled wall. To that end, we developed a robot using the Robot Operational System (ROS) for the robot logic and the Simple Two-Dimensional Robot Simulator (STDR Simulator) to simulate the environment.
 
-## Setup
+## Pre-Requisites & Setup
 
 - [Install ROS melodic](http://wiki.ros.org/melodic/Installation);
 - [Configure the catkin workspace](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment#Create_a_ROS_Workspace);
