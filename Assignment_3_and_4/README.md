@@ -1,6 +1,8 @@
 # Assignment 3 & 4
 
-This is the repository for Assignment 3 and 4 of the Robotics curricular unit at FEUP. 
+This is the repository for Assignment 3 and 4 of the Robotics curricular unit at FEUP.
+
+## Goal
 
 The objective of these assignments is the development of a Cat & Mouse game. The first should chase and capture the second whilst the second should avoid being captured.
 
