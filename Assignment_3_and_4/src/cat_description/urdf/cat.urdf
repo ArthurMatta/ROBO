@@ -1,27 +1,265 @@
 <?xml version="1.0"?>
+
 <robot name="cat">
-	<link name="cat_body">
-		<inertial>
-			<origin xyz="0 0 0.5" rpy="0 0 0"/>
-			<mass value="1"/>
-			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
-		</inertial>
 
+	<gazebo>
+	  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+	    <robotNamespace>/cat</robotNamespace>
+	  </plugin>
+	</gazebo>
+
+	<material name="gray">
+		<color rgba="0.6 0.6 0.6 1"/>
+	</material>
+
+	<link name="base_link">
 		<visual>
-			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<box size="1 1 1" />
+				<cylinder length="0.5" radius="0.15" />
 			</geometry>
-			<material name="Cyan">
-				<color rgba="0 1.0 1.0 1.0"/>
-			</material>
+			<origin rpy="0 1.57075 0" xyz="0 0 0.3"/>
+			<material name="gray"/>
 		</visual>
-
 		<collision>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<geometry>
-				<cylinder radius="1" length="0.5"/>
+				<cylinder length="0.5" radius="0.15" />
+			</geometry>
+			<origin rpy="0 1.57075 0" xyz="0 0 0.3"/>
+		</collision>
+		<inertial>
+		       <mass value="10"/>
+		       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+		</inertial>
+	</link>
+	<link name="head">
+		<visual>
+			<geometry>
+				<sphere radius="0.15" />
+			</geometry>
+			<material name="gray"/>
+		</visual>
+		<collision>
+			<geometry>
+				<sphere radius="0.15" />
 			</geometry>
 		</collision>
+		<inertial>
+		       <mass value="10"/>
+		       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+		</inertial>
 	</link>
+	<joint name="base_head" type="fixed">
+	     <parent link="base_link"/>
+	     <child link="head"/>
+	     <origin rpy="0 0 0" xyz="0.35 0 0.45"/>
+   	</joint>
+
+	<link name="leg_LF">
+		<visual>
+			<geometry>
+				<cylinder length="0.25" radius="0.05" />
+			</geometry>
+			<material name="gray"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.25" radius="0.05" />
+			</geometry>
+		</collision>
+		<inertial>
+		       <mass value="10"/>
+		       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+		</inertial>
+	</link>
+	<joint name="base_leg_LF" type="fixed">
+	     <parent link="base_link"/>
+	     <child link="leg_LF"/>
+	     <origin rpy="0 0 0" xyz="0.2 0.075 0.125"/>
+   	</joint>
+
+	<link name="leg_LF_wheel">
+		<visual>
+			<geometry>
+				<cylinder length="0.06" radius="0.02" />
+			</geometry>
+			<material name="gray"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.06" radius="0.02" />
+			</geometry>
+		</collision>
+		<inertial>
+		       <mass value="10"/>
+		       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+		</inertial>
+	</link>
+	<joint name="leg_LF_wheel_link" type="continuous">
+	     <parent link="leg_LF"/>
+	     <child link="leg_LF_wheel"/>
+	     <origin rpy="1.57075 1.57075 0" xyz="0 0 -0.125"/>
+	     <axis xyz="0 0 1" />
+   	</joint>
+
+	<link name="leg_RF">
+		<visual>
+			<geometry>
+				<cylinder length="0.25" radius="0.05" />
+			</geometry>
+			<material name="gray"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.25" radius="0.05" />
+			</geometry>
+		</collision>
+		<inertial>
+		       <mass value="10"/>
+		       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+		</inertial>
+	</link>
+	<joint name="base_leg_RF" type="fixed">
+	     <parent link="base_link"/>
+	     <child link="leg_RF"/>
+	     <origin rpy="0 0 0" xyz="0.2 -0.075 0.125"/>
+   	</joint>
+
+	<link name="leg_RF_wheel">
+		<visual>
+			<geometry>
+				<cylinder length="0.06" radius="0.02" />
+			</geometry>
+			<material name="gray"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.06" radius="0.02" />
+			</geometry>
+		</collision>
+		<inertial>
+		       <mass value="10"/>
+		       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+		</inertial>
+	</link>
+	<joint name="leg_RF_wheel_link" type="continuous">
+	     <parent link="leg_RF"/>
+	     <child link="leg_RF_wheel"/>
+	     <origin rpy="1.57075 1.57075 0" xyz="0 0 -0.125"/>
+	     <axis xyz="0 0 1" />
+   	</joint>
+
+	<link name="leg_LB">
+		<visual>
+			<geometry>
+				<cylinder length="0.25" radius="0.05" />
+			</geometry>
+			<material name="gray"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.25" radius="0.05" />
+			</geometry>
+		</collision>
+		<inertial>
+		       <mass value="10"/>
+		       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+		</inertial>
+	</link>
+	<joint name="base_leg_LB" type="fixed">
+	     <parent link="base_link"/>
+	     <child link="leg_LB"/>
+	     <origin rpy="0 0 0" xyz="-0.2 0.075 0.125"/>
+   	</joint>
+
+	<link name="leg_LB_wheel">
+		<visual>
+			<geometry>
+				<cylinder length="0.06" radius="0.02" />
+			</geometry>
+			<material name="gray"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.06" radius="0.02" />
+			</geometry>
+		</collision>
+		<inertial>
+		       <mass value="10"/>
+		       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+		</inertial>
+	</link>
+	<joint name="leg_LB_wheel_link" type="continuous">
+	     <parent link="leg_LB"/>
+	     <child link="leg_LB_wheel"/>
+	     <origin rpy="1.57075 1.57075 0" xyz="0 0 -0.125"/>
+	     <axis xyz="0 0 1" />
+	     <mimic joint="leg_LF_wheel_link"/>
+   	</joint>
+
+	<link name="leg_RB">
+		<visual>
+			<geometry>
+				<cylinder length="0.25" radius="0.05" />
+			</geometry>
+			<material name="gray"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.25" radius="0.05" />
+			</geometry>
+		</collision>
+		<inertial>
+		       <mass value="10"/>
+		       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+		</inertial>
+	</link>
+	<joint name="base_leg_RB" type="fixed">
+	     <parent link="base_link"/>
+	     <child link="leg_RB"/>
+	     <origin rpy="0 0 0" xyz="-0.2 -0.075 0.125"/>
+   	</joint>
+
+	<link name="leg_RB_wheel">
+		<visual>
+			<geometry>
+				<cylinder length="0.06" radius="0.02" />
+			</geometry>
+			<material name="gray"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.06" radius="0.02" />
+			</geometry>
+		</collision>
+		<inertial>
+		       <mass value="10"/>
+		       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+		</inertial>
+	</link>
+	<joint name="leg_RB_wheel_link" type="continuous">
+	     <parent link="leg_RB"/>
+	     <child link="leg_RB_wheel"/>
+	     <origin rpy="1.57075 1.57075 0" xyz="0 0 -0.125"/>
+	     <axis xyz="0 0 1" />
+	     <mimic joint="leg_RF_wheel_link"/>
+   	</joint>
+
+	<transmission name="left_trans"> <type>sr_mechanism_model/Transmission</type> <actuator name="LT">
+	  <mechanicalReduction>1</mechanicalReduction>
+	 </actuator>
+	 <joint name="leg_LF_wheel_link">
+	  <hardwareInterface>EffortJointInterface
+	  </hardwareInterface>
+	 </joint>
+	</transmission>
+
+	<transmission name="right_trans"> <type>sr_mechanism_model/Transmission</type> <actuator name="RT">
+	  <mechanicalReduction>1</mechanicalReduction>
+	 </actuator>
+	 <joint name="leg_RF_wheel_link">
+	  <hardwareInterface>EffortJointInterface
+	  </hardwareInterface>
+	 </joint>
+	</transmission>
+
 </robot>
