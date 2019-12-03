@@ -1,33 +1,27 @@
 <?xml version="1.0"?>
 <robot name="cat">
-  <link name="base_link">
-    <visual>
-      <geometry>
-        <cylinder length="0.6" radius="0.2"/>
-      </geometry>
-    </visual>
-  </link>
-</robot><?xml version="1.0"?>
-<robot name="multipleshapes">
-  <link name="base_link">
-    <visual>
-      <geometry>
-        <cylinder length="0.6" radius="0.2"/>
-      </geometry>
-    </visual>
-  </link>
+	<link name="cat_body">
+		<inertial>
+			<origin xyz="0 0 0.5" rpy="0 0 0"/>
+			<mass value="1"/>
+			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
+		</inertial>
 
-  <link name="right_leg">
-    <visual>
-      <geometry>
-        <box size="0.6 0.1 0.2"/>
-      </geometry>
-    </visual>
-  </link>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="1 1 1" />
+			</geometry>
+			<material name="Cyan">
+				<color rgba="0 1.0 1.0 1.0"/>
+			</material>
+		</visual>
 
-  <joint name="base_to_right_leg" type="fixed">
-    <parent link="base_link"/>
-    <child link="right_leg"/>
-  </joint>
-
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="1" length="0.5"/>
+			</geometry>
+		</collision>
+	</link>
 </robot>
