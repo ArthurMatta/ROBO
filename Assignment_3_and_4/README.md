@@ -31,4 +31,14 @@ catkin_ws/
 
 ## Running the Program
 
-TBA
+- Execute the following command to initialize the world in gazebo:
+
+```
+	roslaunch cat_gazebo cat.launch
+```
+
+- After the world is initialized, open another terminal and execute the following command to load the cat robot:
+
+```
+	rosrun gazebo_ros spawn_model -file `rospack find cat_description`/urdf/cat.urdf -urdf -x 0 -y 0 -z 1 -model cat
+```
