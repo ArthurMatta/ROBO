@@ -7,7 +7,7 @@
 		<include>
 			<uri>model://sun</uri>
 		</include>
-		<!-- ros_control mybot launch file -->
+		<!-- ros_control cat launch file -->
 		<include file="$(find cat_control)/launch/cat_control.launch" />
 	</world>
 </sdf>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+			<robotNamespace>/cat</robotNamespace>
+		</plugin>
+	</gazebo>
+
+	<gazebo reference="base_link">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+
+	<gazebo reference="head">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+
+	<gazebo reference="leg_LF">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+
+	<gazebo reference="leg_LF_wheel">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+
+	<gazebo reference="leg_RF">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+
+	<gazebo reference="leg_RF_wheel">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+
+	<gazebo reference="leg_LB">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+
+	<gazebo reference="leg_LB_wheel">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+
+	<gazebo reference="leg_RB">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+
+	<gazebo reference="leg_RB_wheel">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+
+</robot>

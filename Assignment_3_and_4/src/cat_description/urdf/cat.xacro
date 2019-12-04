@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+
+<robot name="cat" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:property name="PI" value="3.1415926535897931"/>
+		
+	<xacro:property name="bodylength" value="0.5"/>
+	<xacro:property name="bodyRadius" value="0.15"/>
+	<xacro:property name="bodyMass" value="10"/>
+
+	<xacro:property name="headRadius" value="0.15"/>
+	<xacro:property name="headMass" value="10"/>
+
+	<xacro:property name="legLength" value="0.25"/>
+	<xacro:property name="legRadius" value="0.05"/>
+	<xacro:property name="legMass" value="10"/>
+
+	<xacro:property name="wheelLength" value="0.06"/>
+	<xacro:property name="wheelRadius" value="0.02"/>
+	<xacro:property name="wheelMass" value="10"/>
+		
+	<xacro:include filename="$(find cat_description)/urdf/cat.gazebo" />
+	<xacro:include filename="$(find cat_description)/urdf/materials.xacro" />
+	<xacro:include filename="$(find cat_description)/urdf/macros.xacro" />
+
+	<link name="base_link">
+		<collision>
+			<geometry>
+				<cylinder length="${bodylength}" radius="${bodyRadius}" />
+			</geometry>
+			<origin rpy="0 1.57075 0" xyz="0 0 0.3"/>
+		</collision>
+		<visual>
+			<geometry>
+				<cylinder length="${bodylength}" radius="${bodyRadius}" />
+			</geometry>
+			<origin rpy="0 1.57075 0" xyz="0 0 0.3"/>
+			<material name="grey" />
+		</visual>
+		<inertial>
+			<origin rpy="0 1.57075 0" xyz="0 0 0.3"/>
+			<mass value="${bodyMass}"/>
+			<cylinder_inertia m="${bodyMass}" r="${bodyRadius}" h="${bodylength}"/>
+		</inertial>
+	</link>
+
+	<link name="head">
+		<visual>
+			<geometry>
+				<sphere radius="${headRadius}" />
+			</geometry>
+			<material name="grey" />
+		</visual>
+		<collision>
+			<geometry>
+				<sphere radius="${headRadius}" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="${headMass}"/>
+			<sphere_inertia m="${headMass}" r="${headRadius}" />
+		</inertial>
+	</link>
+
+	<joint name="base_head" type="fixed">
+		<parent link="base_link"/>
+		<child link="head"/>
+		<origin rpy="0 0 0" xyz="0.35 0 0.45"/>
+	</joint>
+
+	<link name="leg_LF">
+		<visual>
+			<geometry>
+				<cylinder length="${legLength}" radius="${legRadius}" />
+			</geometry>
+			<material name="grey" />
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="${legLength}" radius="${legRadius}" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="${legMass}"/>
+			<cylinder_inertia m="${legMass}" r="${legRadius}" h="${legLength}"/>
+		</inertial>
+	</link>
+
+	<joint name="base_leg_LF" type="fixed">
+		<parent link="base_link"/>
+		<child link="leg_LF"/>
+		<origin rpy="0 0 0" xyz="0.2 0.075 0.125"/>
+	</joint>
+
+	<link name="leg_LF_wheel">
+		<visual>
+			<geometry>
+				<cylinder length="${wheelLength}" radius="${wheelRadius}" />
+			</geometry>
+			<material name="grey" />
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="${wheelLength}" radius="${wheelRadius}" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="${wheelMass}"/>
+			<cylinder_inertia m="${wheelMass}" r="${wheelRadius}" h="${wheelLength}"/>
+		</inertial>
+	</link>
+
+	<joint name="leg_LF_wheel_link" type="continuous">
+		<parent link="leg_LF"/>
+		<child link="leg_LF_wheel"/>
+		<origin rpy="1.57075 1.57075 0" xyz="0 0 -0.125"/>
+		<axis xyz="0 0 1" />
+	</joint>
+
+	<link name="leg_RF">
+		<visual>
+			<geometry>
+				<cylinder length="${legLength}" radius="${legRadius}" />
+			</geometry>
+			<material name="grey" />
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="${legLength}" radius="${legRadius}" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="${legMass}"/>
+			<cylinder_inertia m="${legMass}" r="${legRadius}" h="${legLength}"/>
+		</inertial>
+	</link>
+
+	<joint name="base_leg_RF" type="fixed">
+		<parent link="base_link"/>
+		<child link="leg_RF"/>
+		<origin rpy="0 0 0" xyz="0.2 -0.075 0.125"/>
+	</joint>
+
+	<link name="leg_RF_wheel">
+		<visual>
+			<geometry>
+				<cylinder length="${wheelLength}" radius="${wheelRadius}" />
+			</geometry>
+			<material name="grey" />
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="${wheelLength}" radius="${wheelRadius}" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="${wheelMass}"/>
+			<cylinder_inertia m="${wheelMass}" r="${wheelRadius}" h="${wheelLength}"/>
+		</inertial>
+	</link>
+
+	<joint name="leg_RF_wheel_link" type="continuous">
+		<parent link="leg_RF"/>
+		<child link="leg_RF_wheel"/>
+		<origin rpy="1.57075 1.57075 0" xyz="0 0 -0.125"/>
+		<axis xyz="0 0 1" />
+	</joint>
+
+	<link name="leg_LB">
+		<visual>
+			<geometry>
+				<cylinder length="${legLength}" radius="${legRadius}" />
+			</geometry>
+			<material name="grey" />
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="${legLength}" radius="${legRadius}" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="${legMass}"/>
+			<cylinder_inertia m="${legMass}" r="${legRadius}" h="${legLength}"/>
+		</inertial>
+	</link>
+
+	<joint name="base_leg_LB" type="fixed">
+		<parent link="base_link"/>
+		<child link="leg_LB"/>
+		<origin rpy="0 0 0" xyz="-0.2 0.075 0.125"/>
+	</joint>
+
+	<link name="leg_LB_wheel">
+		<visual>
+			<geometry>
+				<cylinder length="${wheelLength}" radius="${wheelRadius}" />
+			</geometry>
+			<material name="grey" />
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="${wheelLength}" radius="${wheelRadius}" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="${wheelMass}"/>
+			<cylinder_inertia m="${wheelMass}" r="${wheelRadius}" h="${wheelLength}"/>
+		</inertial>
+	</link>
+
+	<joint name="leg_LB_wheel_link" type="continuous">
+		<parent link="leg_LB"/>
+		<child link="leg_LB_wheel"/>
+		<origin rpy="1.57075 1.57075 0" xyz="0 0 -0.125"/>
+		<axis xyz="0 0 1" />
+		<mimic joint="leg_LF_wheel_link"/>
+	</joint>
+
+	<link name="leg_RB">
+		<visual>
+			<geometry>
+				<cylinder length="${legLength}" radius="${legRadius}" />
+			</geometry>
+			<material name="grey" />
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="${legLength}" radius="${legRadius}" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="${legMass}"/>
+			<cylinder_inertia m="${legMass}" r="${legRadius}" h="${legLength}"/>
+		</inertial>
+	</link>
+
+	<joint name="base_leg_RB" type="fixed">
+		<parent link="base_link"/>
+		<child link="leg_RB"/>
+		<origin rpy="0 0 0" xyz="-0.2 -0.075 0.125"/>
+	</joint>
+
+	<link name="leg_RB_wheel">
+		<visual>
+			<geometry>
+				<cylinder length="${wheelLength}" radius="${wheelRadius}" />
+			</geometry>
+			<material name="grey" />
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="${wheelLength}" radius="${wheelRadius}" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="${wheelMass}"/>
+			<cylinder_inertia m="${wheelMass}" r="${wheelRadius}" h="${wheelLength}"/>
+		</inertial>
+	</link>
+
+	<joint name="leg_RB_wheel_link" type="continuous">
+		<parent link="leg_RB"/>
+		<child link="leg_RB_wheel"/>
+		<origin rpy="1.57075 1.57075 0" xyz="0 0 -0.125"/>
+		<axis xyz="0 0 1" />
+		<mimic joint="leg_RF_wheel_link"/>
+	</joint>
+
+	<transmission name="left_trans">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="leg_LF_wheel_link">
+			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="LT">
+			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="right_trans">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="leg_RF_wheel_link">
+			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="RT">
+			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+</robot>
