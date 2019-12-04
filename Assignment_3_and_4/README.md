@@ -25,28 +25,27 @@ sudo apt-get install ros-melodic-robot-state-publisher
 - Donwload this repository and move the contents of *Assignment_3_and_4* folder into the *catkin_ws* folder. Your folder structure should be something like this:
 ```
 catkin_ws/
-	build/
-		...
-	devel/
-		setup.bash
-		...
-	src/
-		cat_description/
-			cad/
-			materials/
-			meshes/
-			urdf/
-		cat_gazebo/
-			launch/
-			materials/
-			models/
-			plugins/
-			worlds/
-		cat_control/
-  		config/
-  		launch/    	
-		CMakeLists.txt
-	...
+   build/
+      ...
+   devel/
+      setup.bash
+      ...
+   src/
+      cat_description/
+         cad/
+         materials/
+         meshes/
+         urdf/
+      cat_gazebo/
+         launch/
+         materials/
+         models/
+         plugins/
+         worlds/
+      cat_control/
+         config/
+         launch/    	
+      CMakeLists.txt
 ```
 
 ## Running the Program
@@ -54,5 +53,5 @@ catkin_ws/
 - Execute the following command to initialize the world with the cat robot in gazebo:
 
 ```
-roslaunch cat_gazebo cat.launch
+roslaunch cat_gazebo cat_world.launch
 ```
