@@ -14,31 +14,45 @@ To that end, two robots were developed using the Robotic Operational System (ROS
 - [Configure the catkin workspace](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment#Create_a_ROS_Workspace);
 - [Install Gazebo](http://gazebosim.org/tutorials?cat=install);
 - [Install gazebo_ros package](http://gazebosim.org/tutorials?tut=ros_installing&cat=connect_ros);
+- [Install ros controllers package](http://wiki.ros.org/ros_control#Install):
+```
+sudo apt-get install ros-melodic-ros-control ros-melodic-ros-controllers
+```
+- [Install ros_state_publisher package](http://wiki.ros.org/robot_state_publisher):
+```
+sudo apt-get install ros-melodic-robot-state-publisher
+```
 - Donwload this repository and move the contents of *Assignment_3_and_4* folder into the *catkin_ws* folder. Your folder structure should be something like this:
 ```
 catkin_ws/
-   build/
-      ...
-   devel/
-      setup.bash
-      ...
-   src/
-      cat_description/
-      cat_gazebo/
-      CMakeLists.txt
-   ...
+	build/
+		...
+	devel/
+		setup.bash
+		...
+	src/
+		cat_description/
+			cad/
+			materials/
+			meshes/
+			urdf/
+		cat_gazebo/
+			launch/
+			materials/
+			models/
+			plugins/
+			worlds/
+		cat_control/
+  		config/
+  		launch/    	
+		CMakeLists.txt
+	...
 ```
 
 ## Running the Program
 
-- Execute the following command to initialize the world in gazebo:
+- Execute the following command to initialize the world with the cat robot in gazebo:
 
 ```
 roslaunch cat_gazebo cat.launch
-```
-
-- After the world is initialized, open another terminal and execute the following command to load the cat robot:
-
-```
-rosrun gazebo_ros spawn_model -file `rospack find cat_description`/urdf/cat.urdf -urdf -x 0 -y 0 -z 1 -model cat
 ```
