@@ -62,15 +62,19 @@ catkin_ws/
 
 ## Running the Program
 
-- Make sure you compiled your working space and sourced the setup file:
+- Remove the devel/ and build/ folders
 ```
 cd <path_to_your_catkin_ws>/catkin_ws
+rm -r build/ devel/
+```
+
+- Recompiled your working space and sourced the setup file:
+```
 catkin_make
 source devel/setup.bash
 ```
 
 - Execute the following command to initialize the world with the cat robot in gazebo:
-
 ```
 roslaunch cat_gazebo cat_world.launch
 ```
