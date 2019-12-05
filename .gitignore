@@ -22,4 +22,6 @@
 /Assignment_3_and_4/src/*
 !/Assignment_3_and_4/src/cat_description
 !/Assignment_3_and_4/src/cat_gazebo
+!/Assignment_3_and_4/src/cat_control
+!/Assignment_3_and_4/src/cat_training
 
