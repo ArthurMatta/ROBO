@@ -25,9 +25,9 @@ sudo apt-get install ros-melodic-ros-control ros-melodic-ros-controllers
 ```
 sudo apt-get install ros-melodic-robot-state-publisher
 ```
-- For the training section it is required to have [python 3.5+](https://www.python.org/downloads/) and the [openAI gym package](https://gym.openai.com/docs/#installation) installed:
+- For the training section it is required to have [python 3.5+](https://www.python.org/downloads/) and the [openAI gym package](https://gym.openai.com/docs/#installation) installed. **Note:** Recent versions of the gym package are causing some errors with our program. Therefore we recommed installing version 0.10.8:
 ```
-pip install gym
+pip install gym==0.10.8
 ```
 - Donwload this repository and move the contents of *Assignment_3_and_4* folder into the *catkin_ws* folder. Your folder structure should be something like this:
 ```
