@@ -1,0 +1,5 @@
+<launch>
+    <rosparam command="load" file="$(find cat_training)/config/cat_params.yaml" />
+    <!-- Launch the training system -->
+    <node pkg="cat_training" name="cat_gym" type="start_training.py" output="screen"/>
+</launch>
