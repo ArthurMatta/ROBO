@@ -14,6 +14,9 @@ To that end, two robots were developed using the Robotic Operational System (ROS
 - [Configure the catkin workspace](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment#Create_a_ROS_Workspace);
 - [Install Gazebo](http://gazebosim.org/tutorials?cat=install);
 - [Install gazebo_ros package](http://gazebosim.org/tutorials?tut=ros_installing&cat=connect_ros);
+```
+sudo apt-get install ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control
+```
 - [Install ros controllers package](http://wiki.ros.org/ros_control#Install):
 ```
 sudo apt-get install ros-melodic-ros-control ros-melodic-ros-controllers
