@@ -114,7 +114,6 @@
       <child link="wheel_${lr}${fb}"/>
       <origin rpy="${PI/2} ${PI/2} 0" xyz="0 0 -${legLength/2}"/>
       <axis xyz="0 0 1"/>
-      <limit effort="100" velocity="100"/>
       <joint_properties damping="0.0" friction="0.0"/>
       <xacro:if value="${mr}">
         <mimic joint="leg_wheel_${mlr}${mfb}_joint"/>
