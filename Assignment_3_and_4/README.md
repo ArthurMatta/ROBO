@@ -22,6 +22,10 @@ sudo apt-get install ros-melodic-ros-control ros-melodic-ros-controllers
 ```
 sudo apt-get install ros-melodic-robot-state-publisher
 ```
+- For the training section it is required to have python 3.5+ and the [openAI gym package](https://gym.openai.com/docs/#installation) installed:
+```
+pip install gym
+```
 - Donwload this repository and move the contents of *Assignment_3_and_4* folder into the *catkin_ws* folder. Your folder structure should be something like this:
 ```
 catkin_ws/
@@ -44,14 +48,34 @@ catkin_ws/
          worlds/
       cat_control/
          config/
-         launch/    	
+         launch/   
+      cat_training/
+         config/
+         launch/
+         scripts/
+         ...
       CMakeLists.txt
 ```
 
 ## Running the Program
+
+- Make sure you compiled your working space and sourced the setup file:
+```
+cd <path_to_your_catkin_ws>/catkin_ws
+catkin_make
+source devel/setup.bash
+```
 
 - Execute the following command to initialize the world with the cat robot in gazebo:
 
 ```
 roslaunch cat_gazebo cat_world.launch
 ```
+
+## Training the Robot
+
+- After launching the simulation with the previous command, execute the following command in a second terminal:
+```
+roslaunch cat_training start_training.launch
+```
+- The robot should start moving and tons of [DEBUG] messages should appear in your terminal.
