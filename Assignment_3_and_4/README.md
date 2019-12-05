@@ -25,7 +25,7 @@ sudo apt-get install ros-melodic-ros-control ros-melodic-ros-controllers
 ```
 sudo apt-get install ros-melodic-robot-state-publisher
 ```
-- For the training section it is required to have python 3.5+ and the [openAI gym package](https://gym.openai.com/docs/#installation) installed:
+- For the training section it is required to have [python 3.5+](https://www.python.org/downloads/) and the [openAI gym package](https://gym.openai.com/docs/#installation) installed:
 ```
 pip install gym
 ```
