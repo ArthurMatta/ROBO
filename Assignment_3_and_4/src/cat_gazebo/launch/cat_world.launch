@@ -20,7 +20,7 @@
 	<!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
 	<param command="$(find xacro)/xacro.py '$(find cat_description)/urdf/cat.xacro'" name="robot_description" />
 
-	<!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+	<!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
 	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
     args="-urdf -param robot_description -model cat "/>
     
