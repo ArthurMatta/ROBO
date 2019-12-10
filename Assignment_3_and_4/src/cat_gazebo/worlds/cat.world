@@ -9,5 +9,7 @@
 		</include>
 		<!-- ros_control cat launch file -->
 		<include file="$(find cat_control)/launch/cat_control.launch" />
+   		<plugin name="cat_plugin" filename="libgazebo_tutorials.so"/>
+
 	</world>
 </sdf>
