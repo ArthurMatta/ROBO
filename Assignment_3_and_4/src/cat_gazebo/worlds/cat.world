@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<sdf version="1.4">
+<sdf version="1.6">
 	<world name="default">
 		<include>
 			<uri>model://ground_plane</uri>
@@ -9,5 +9,15 @@
 		</include>
 		<!-- ros_control cat launch file -->
 		<include file="$(find cat_control)/launch/cat_control.launch" />
+
+<!-- Model -->
+    <model name="cat_octagon">
+      <include>
+            <static>true</static>
+        <uri>model://cat_octagon</uri>
+        <pose> 0 0 0 0 0 0</pose>
+      </include>
+    </model>
+
 	</world>
 </sdf>
