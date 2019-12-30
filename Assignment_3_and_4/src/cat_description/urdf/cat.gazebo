@@ -8,7 +8,7 @@
 		</plugin>
 	</gazebo>
 
-	
+
 	<!-- hokuyo -->
 	<gazebo reference="hokuyo_link">
 		<sensor type="ray" name="head_hokuyo_sensor">

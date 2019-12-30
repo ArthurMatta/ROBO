@@ -18,6 +18,7 @@
         <pose> 0 0 0 0 0 0</pose>
       </include>
     </model>
+   		<plugin name="cat_plugin" filename="libgazebo_tutorials.so"/>
 
 	</world>
 </sdf>
