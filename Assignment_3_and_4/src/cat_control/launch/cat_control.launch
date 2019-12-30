@@ -13,7 +13,9 @@
     type="spawner" respawn="false"
     output="screen" ns="/cat"
     args="joint_state_controller
-          leftWheel_effort_controller rightWheel_effort_controller"
+         
+          leftSpinner_effort_controller rightSpinner_effort_controller
+          leftBWheel_effort_controller rightBWheel_effort_controller"
   />
 
   <!-- convert joint states to TF transforms for rviz, etc -->

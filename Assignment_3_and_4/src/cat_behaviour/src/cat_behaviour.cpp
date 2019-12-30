@@ -25,7 +25,7 @@ int main(int argc, char ** argv)
 	cout << "Building Message" << endl;
 
 	std_msgs::Float64 message;
-	message.data = 100;
+	message.data = 20;
 
 	ros::Rate(200);
 	cout << "Publishing Message" << endl;
@@ -36,7 +36,6 @@ int main(int argc, char ** argv)
 	   pub2.publish(message);
 	   ros::spinOnce();               
 	}
-
  }
 
 

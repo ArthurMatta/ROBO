@@ -76,6 +76,53 @@
     </joint>
   </xacro:macro>
 
+  <xacro:macro name="spinner" params="lr fb tY tX">
+
+    <link name="spinner_${lr}${fb}">
+      <collision>
+        <geometry>
+          <cylinder length="${spinnerLength}" radius="${spinnerRadius}" />
+        </geometry>
+      </collision>
+
+      <visual>
+        <geometry>
+          <cylinder length="${spinnerLength}" radius="${spinnerRadius}" />
+        </geometry>
+        <material name="grey" />
+      </visual>
+
+      <inertial>
+        <mass value="${spinnerMass}"/>
+        <cylinder_inertia m="${spinnerMass}" r="${spinnerRadius}" h="${spinnerLength}"/>
+      </inertial>
+    </link>
+
+    <gazebo reference="leg_${lr}${fb}">
+      <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <joint name="leg_${lr}${fb}_spinner_joint" type="revolute">
+      <parent link="leg_${lr}${fb}"/>
+      <child link="spinner_${lr}${fb}"/>
+      <limit lower="-0.7" upper="0.7" effort="1000" velocity="1000"/> 
+      <origin rpy="0 0 0" xyz="0 0 -${legLength/2}"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <transmission name="trans_spin_${lr}${fb}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="leg_${lr}${fb}_spinner_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor_spin_${lr}${fb}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  </xacro:macro>
+
   <!--
     lr = left/right ("L" | " R")
     fb = front/back ("F" | "B")
@@ -83,7 +130,44 @@
     mlr = mirror left/right ("L" | "R")
     mfb = mirror front/back ("F" | "B")
   -->
-  <xacro:macro name="wheel" params="lr fb mr mlr mfb">
+  <xacro:macro name="wheel" params="lr fb">
+
+    <link name="wheel_${lr}${fb}">
+      <collision>
+        <geometry>
+          <cylinder length="${wheelLength}" radius="${wheelRadius}" />
+        </geometry>
+      </collision>
+
+      <visual>
+        <geometry>
+          <cylinder length="${wheelLength}" radius="${wheelRadius}" />
+        </geometry>
+        <material name="black" />
+      </visual>
+
+      <inertial>
+        <mass value="${wheelMass}"/>
+        <cylinder_inertia m="${wheelMass}" r="${wheelRadius}" h="${wheelLength}"/>
+      </inertial>
+    </link>
+
+    <gazebo reference="wheel_${lr}${fb}">
+      <material>Gazebo/Black</material>
+    </gazebo>
+
+    <joint name="leg_wheel_${lr}${fb}_joint" type="continuous">
+      <parent link="spinner_${lr}${fb}"/>
+      <child link="wheel_${lr}${fb}"/>
+      <origin rpy="${PI/2} ${PI/2} 0" xyz="0 0 -${spinnerLength/2}"/>
+      <axis xyz="0 0 -1"/>
+      <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    
+  </xacro:macro>
+
+  <xacro:macro name="wheelB" params="lr fb">
 
     <link name="wheel_${lr}${fb}">
       <collision>
@@ -115,9 +199,6 @@
       <origin rpy="${PI/2} ${PI/2} 0" xyz="0 0 -${legLength/2}"/>
       <axis xyz="0 0 -1"/>
       <joint_properties damping="0.0" friction="0.0"/>
-      <xacro:if value="${mr}">
-        <mimic joint="leg_wheel_${mlr}${mfb}_joint"/>
-      </xacro:if>
     </joint>
 
     <transmission name="trans_${lr}${fb}">
