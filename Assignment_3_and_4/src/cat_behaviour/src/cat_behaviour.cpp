@@ -20,34 +20,44 @@ namespace cat_robot{
 		spinR = nh.advertise<std_msgs::Float64>(rightSpinner_topic.c_str() , 1);
 	}
 
+	void CatRobot::printCollision(double dist, double angle){
+		cout << fixed << setprecision(2) << "Distance: " << dist << " m " << setprecision(0) << "Angle: " << angle << "°"<< endl;
+	}
+
 	void CatRobot::callback(const sensor_msgs::PointCloud& msg){
 		
-		//cout << msg << endl;
-
 		scan = msg;
-
-		//cout << scan.points.size() << endl;
 		
 		bool top = false, mid = false, bot = false;
 
 		for(int i = 0 ; i < scan.points.size() ; i++){
 			double x = scan.points[i].x;
 			double y = scan.points[i].y;
-			double dist = sqrt(pow(x, 2) + pow(y, 2));
-			if(i < 200){
-				if(dist < 0.2){
+			double dist = sqrt(pow(x, 2) + pow(y, 2)) + 0.16; // Acrescentar 0.16 de range minimo do sensor
+			double angle = atan(x/y) * 180 / PI;
+			double minBotDist = 0.45 / cos(30*(PI/180));
+			double minMidDist = 0.45 / cos(60*(PI/180));
+			double minTopDist = 3;
+
+			if(angle < 0){
+				angle = 90 + (90 + angle);
+			}
+			if(i < 199){ // Ignorar sensor 199 propositadamente
+				if(dist < minBotDist - 0.01){ // Remover 0.01 devido a inprecisoes do sensor
 					bot = true;
+					CatRobot::printCollision(dist, angle);
 				}
 			}
-			else if (i >= 200 && i < 400){
-				if(dist < 0.6){
+			else if (i >= 200 && i < 399){ // Ignorar sensor 399 propositadamente
+				if(dist < minMidDist - 0.01){
 					mid = true;
+					CatRobot::printCollision(dist, angle);
 				}
 			}
-			else if (i >= 400 && i < 600){
-				if(dist < 2.6){
+			else if (i >= 400 && i < 599){ // Ignorar sensor 599 propositadamente
+				if(dist < minTopDist - 0.01){
 					top = true;
-					cout << dist << endl;
+					CatRobot::printCollision(dist, angle);
 				}
 			}
 		}
