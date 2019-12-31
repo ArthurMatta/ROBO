@@ -46,9 +46,13 @@
 			</noise>
 		</ray>
 		<plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_block_laser.so">
+			<gaussianNoise>0.00</gaussianNoise>
+			<alwaysOn>true</alwaysOn>
+			<updateRate>20</updateRate>
 			<topicName>/cat/laser/scan</topicName>
 			<frameName>hokuyo_link</frameName>
 		</plugin>
+		<alwaysOn>true</alwaysOn>
 		</sensor>
 	</gazebo>
 

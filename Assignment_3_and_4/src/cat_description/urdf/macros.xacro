@@ -159,7 +159,7 @@
     <joint name="leg_wheel_${lr}${fb}_joint" type="continuous">
       <parent link="spinner_${lr}${fb}"/>
       <child link="wheel_${lr}${fb}"/>
-      <origin rpy="${PI/2} ${PI/2} 0" xyz="0 0 -${spinnerLength/2}"/>
+      <origin rpy="${PI/2} ${PI/2} 0" xyz="0 0 0"/>
       <axis xyz="0 0 -1"/>
       <joint_properties damping="0.0" friction="0.0"/>
     </joint>
