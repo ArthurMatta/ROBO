@@ -8,19 +8,22 @@
 
   <!-- load the controllers -->
   <node
-    name="controller_spawner"
+    name="cat_controller_spawner"
     pkg="controller_manager"
     type="spawner" respawn="false"
     output="screen" ns="/cat"
-    args="joint_state_controller
-         
-          leftSpinner_effort_controller rightSpinner_effort_controller
-          leftBWheel_effort_controller rightBWheel_effort_controller"
+    args="
+        --namespace=/cat
+        cat_joint_state_controller
+        cat_leftSpinner_effort_controller
+        cat_rightSpinner_effort_controller
+        cat_leftBWheel_effort_controller
+        cat_rightBWheel_effort_controller"
   />
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node
-    name="robot_state_publisher"
+    name="cat_state_publisher"
     pkg="robot_state_publisher"
     type="robot_state_publisher"
     respawn="false" output="screen"

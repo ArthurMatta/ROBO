@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!--
+    m = mass
+    r = radius
+    h = height
+  -->
+  <xacro:macro name="cylinder_inertia" params="m r h">
+    <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+              iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+              izz="${m*r*r/2}"
+    />
+  </xacro:macro>
+
+  <!--
+    m = mass
+    x = x value
+    y = y value
+    z = z value
+  -->
+  <xacro:macro name="box_inertia" params="m x y z">
+    <inertia  ixx="${m*(y*y+z*z)/12}" ixy = "0" ixz = "0"
+              iyy="${m*(x*x+z*z)/12}" iyz = "0"
+              izz="${m*(x*x+z*z)/12}"
+    />
+  </xacro:macro>
+
+  <!--
+    m = mass
+    r = radius
+  -->
+  <xacro:macro name="sphere_inertia" params="m r">
+    <inertia  ixx="${2*m*r*r/5}" ixy = "0" ixz = "0"
+              iyy="${2*m*r*r/5}" iyz = "0"
+              izz="${2*m*r*r/5}"
+    />
+  </xacro:macro>
+
+  <!--  
+    lr = left/right ("L" | "R")
+    fb = front/back ("F" | "B")
+    tY = translation in Y ("1" | "-1")
+    tX = translation in X ("1" | "-1")
+  -->
+  <xacro:macro name="leg" params="lr fb tY tX">
+
+    <link name="leg_${lr}${fb}">
+      <collision>
+        <geometry>
+          <cylinder length="${legLength}" radius="${legRadius}" />
+        </geometry>
+      </collision>
+
+      <visual>
+        <geometry>
+          <cylinder length="${legLength}" radius="${legRadius}" />
+        </geometry>
+        <material name="grey" />
+      </visual>
+
+      <inertial>
+        <mass value="${legMass}"/>
+        <cylinder_inertia m="${legMass}" r="${legRadius}" h="${legLength}"/>
+      </inertial>
+    </link>
+
+    <gazebo reference="leg_${lr}${fb}">
+      <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <joint name="body_leg_${lr}${fb}_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="leg_${lr}${fb}"/>
+      <origin rpy="0 0 0" xyz="${tX*2*bodyLength/5} ${tY*bodyRadius/2} ${legLength/2}"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="spinner" params="lr fb tY tX">
+
+    <link name="spinner_${lr}${fb}">
+      <collision>
+        <geometry>
+          <cylinder length="${spinnerLength}" radius="${spinnerRadius}" />
+        </geometry>
+      </collision>
+
+      <visual>
+        <geometry>
+          <cylinder length="${spinnerLength}" radius="${spinnerRadius}" />
+        </geometry>
+        <material name="grey" />
+      </visual>
+
+      <inertial>
+        <mass value="${spinnerMass}"/>
+        <cylinder_inertia m="${spinnerMass}" r="${spinnerRadius}" h="${spinnerLength}"/>
+      </inertial>
+    </link>
+
+    <gazebo reference="leg_${lr}${fb}">
+      <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <joint name="leg_${lr}${fb}_spinner_joint" type="revolute">
+      <parent link="leg_${lr}${fb}"/>
+      <child link="spinner_${lr}${fb}"/>
+      <limit lower="-0.7" upper="0.7" effort="1000" velocity="1000"/> 
+      <origin rpy="0 0 0" xyz="0 0 -${legLength/2}"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <transmission name="trans_spin_${lr}${fb}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="leg_${lr}${fb}_spinner_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor_spin_${lr}${fb}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  </xacro:macro>
+
+  <!--
+    lr = left/right ("L" | " R")
+    fb = front/back ("F" | "B")
+    mr = mirror (Boolean | "")
+    mlr = mirror left/right ("L" | "R")
+    mfb = mirror front/back ("F" | "B")
+  -->
+  <xacro:macro name="wheel" params="lr fb">
+
+    <link name="wheel_${lr}${fb}">
+      <collision>
+        <geometry>
+          <cylinder length="${wheelLength}" radius="${wheelRadius}" />
+        </geometry>
+      </collision>
+
+      <visual>
+        <geometry>
+          <cylinder length="${wheelLength}" radius="${wheelRadius}" />
+        </geometry>
+        <material name="black" />
+      </visual>
+
+      <inertial>
+        <mass value="${wheelMass}"/>
+        <cylinder_inertia m="${wheelMass}" r="${wheelRadius}" h="${wheelLength}"/>
+      </inertial>
+    </link>
+
+    <gazebo reference="wheel_${lr}${fb}">
+      <material>Gazebo/Black</material>
+    </gazebo>
+
+    <joint name="leg_wheel_${lr}${fb}_joint" type="continuous">
+      <parent link="spinner_${lr}${fb}"/>
+      <child link="wheel_${lr}${fb}"/>
+      <origin rpy="${PI/2} ${PI/2} 0" xyz="0 0 0"/>
+      <axis xyz="0 0 -1"/>
+      <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    
+  </xacro:macro>
+
+  <xacro:macro name="wheelB" params="lr fb">
+
+    <link name="wheel_${lr}${fb}">
+      <collision>
+        <geometry>
+          <cylinder length="${wheelLength}" radius="${wheelRadius}" />
+        </geometry>
+      </collision>
+
+      <visual>
+        <geometry>
+          <cylinder length="${wheelLength}" radius="${wheelRadius}" />
+        </geometry>
+        <material name="black" />
+      </visual>
+
+      <inertial>
+        <mass value="${wheelMass}"/>
+        <cylinder_inertia m="${wheelMass}" r="${wheelRadius}" h="${wheelLength}"/>
+      </inertial>
+    </link>
+
+    <gazebo reference="wheel_${lr}${fb}">
+      <material>Gazebo/Black</material>
+    </gazebo>
+
+    <joint name="leg_wheel_${lr}${fb}_joint" type="continuous">
+      <parent link="leg_${lr}${fb}"/>
+      <child link="wheel_${lr}${fb}"/>
+      <origin rpy="${PI/2} ${PI/2} 0" xyz="0 0 -${legLength/2}"/>
+      <axis xyz="0 0 -1"/>
+      <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    <transmission name="trans_${lr}${fb}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="leg_wheel_${lr}${fb}_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor_${lr}${fb}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+</robot>

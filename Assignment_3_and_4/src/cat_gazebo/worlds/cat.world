@@ -7,17 +7,21 @@
 		<include>
 			<uri>model://sun</uri>
 		</include>
+
 		<!-- ros_control cat launch file -->
 		<include file="$(find cat_control)/launch/cat_control.launch" />
+		<include file="$(find mouse_control)/launch/mouse_control.launch" />
 
-<!-- Model -->
-    <model name="cat_octagon">
-      <include>
-            <static>true</static>
-        <uri>model://cat_octagon</uri>
-        <pose> 0 0 0 0 0 0</pose>
-      </include>
-    </model>
+		<!-- Model -->
+	    <model name="cat_octagon">
+	      <include>
+	            <static>true</static>
+	        <uri>model://cat_octagon</uri>
+	        <pose> 0 0 0 0 0 0</pose>
+	      </include>
+	    </model>
+
+	    <!-- Plugin -->
    		<plugin name="cat_plugin" filename="libgazebo_tutorials.so"/>
 
 	</world>

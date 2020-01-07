@@ -17,14 +17,36 @@
 		<env name="GAZEBO_MODEL_PATH" value="$(find cat_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)"/>
 	</include>
 	
-	<!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
-	<param command="$(find xacro)/xacro '$(find cat_description)/urdf/cat.xacro'" name="robot_description" />
 
-	<!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
-	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-    args="-urdf -param robot_description -model cat "/>
-    
-	<!-- ros_control cat launch file -->
-	<include file="$(find cat_control)/launch/cat_control.launch" />
+	<group ns="cat">
+		<param name="tf_prefix" value="cat_tf" />
+
+		<!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
+		<param name="robot_description" command="$(find xacro)/xacro '$(find cat_description)/urdf/cat.xacro'" />
+
+		<!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
+		<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	    args="-urdf -param robot_description -model cat -x 2 -y 2 -z 0 "/>
+	    
+		<!-- ros_control cat launch file -->
+		<include file="$(find cat_control)/launch/cat_control.launch" />
+	</group>
+
+	<group ns="mouse">
+		<param name="tf_prefix" value="mouse_tf" />
+
+		<!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
+		<param name="robot_description" command="$(find xacro)/xacro '$(find mouse_description)/urdf/mouse.xacro'" />
+
+		<!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
+		<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	    args="-urdf -param robot_description -model mouse -x 2 -y -2 -z 0 "/>
+	    
+		<!-- ros_control cat launch file -->
+		<include file="$(find mouse_control)/launch/mouse_control.launch" />
+
+	</group>
+
+	
 
 </launch>

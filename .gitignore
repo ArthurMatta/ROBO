@@ -21,10 +21,13 @@
 !/Assignment_3_and_4/src
 /Assignment_3_and_4/src/*
 !/Assignment_3_and_4/src/cat_description
+!/Assignment_3_and_4/src/mouse_description
 !/Assignment_3_and_4/src/cat_gazebo
 !/Assignment_3_and_4/src/cat_control
+!/Assignment_3_and_4/src/mouse_control
 !/Assignment_3_and_4/src/cat_training
 !/Assignment_3_and_4/src/cat_behaviour
 !/Assignment_3_and_4/src/cat.rviz
+/Assignment_3_and_4/src/cat_training/training_results/*
 
 
