@@ -6,47 +6,54 @@
 		
 	<xacro:property name="bodyLength" value="0.25"/>
 	<xacro:property name="bodyRadius" value="0.07"/>
-	<xacro:property name="bodyMass" value="25"/>
+	<xacro:property name="bodyMass" value="50"/>
 
 	<xacro:property name="headRadius" value="0.07"/>
-	<xacro:property name="headMass" value="5"/>
+	<xacro:property name="headMass" value="10"/>
 
 	<xacro:property name="legLength" value="0.12"/>
 	<xacro:property name="legRadius" value="0.02"/>
-	<xacro:property name="legMass" value="5"/>
+	<xacro:property name="legMass" value="10"/>
 
-	<xacro:property name="spinnerLength" value="0.01"/>
-	<xacro:property name="spinnerRadius" value="0.04"/>
+	<xacro:property name="spinnerLength" value="0.005"/>
+	<xacro:property name="spinnerRadius" value="0.02"/>
 	<xacro:property name="spinnerMass" value="1"/>
 
 	<xacro:property name="wheelLength" value="0.03"/>
 	<xacro:property name="wheelRadius" value="0.01"/>
-	<xacro:property name="wheelMass" value="5"/>
+	<xacro:property name="wheelMass" value="10"/>
 		
 	<xacro:include filename="$(find mouse_description)/urdf/mouse.gazebo" />
 	<xacro:include filename="$(find mouse_description)/urdf/materials.xacro" />
 	<xacro:include filename="$(find mouse_description)/urdf/macros.xacro" />
 
 	<link name="base_link">
+	</link>
+
+	<link name="body">
 		<collision>
 			<geometry>
 				<cylinder length="${bodyLength}" radius="${bodyRadius}" />
 			</geometry>
-			<origin rpy="0 ${PI/2} 0" xyz="0 0 0.15"/>
 		</collision>
 		<visual>
 			<geometry>
 				<cylinder length="${bodyLength}" radius="${bodyRadius}" />
 			</geometry>
-			<origin rpy="0 ${PI/2} 0" xyz="0 0 0.15"/>
 			<material name="grey" />
 		</visual>
 		<inertial>
-			<origin rpy="0 ${PI/2} 0" xyz="0 0 0.15"/>
 			<mass value="${bodyMass}"/>
 			<cylinder_inertia m="${bodyMass}" r="${bodyRadius}" h="${bodyLength}"/>
 		</inertial>
 	</link>
+
+	<joint name="base_body" type="fixed">
+		<parent link="base_link"/>
+		<child link="body"/>
+		<origin rpy="0 ${PI/2} 0" xyz="0 0 ${legLength + spinnerLength + wheelLength/2}"/>
+	</joint>
+
 
 	<link name="head">
 		<visual>
@@ -66,10 +73,10 @@
 		</inertial>
 	</link>
 
-	<joint name="base_head" type="fixed">
-		<parent link="base_link"/>
+	<joint name="body_head" type="fixed">
+		<parent link="body"/>
 		<child link="head"/>
-		<origin rpy="0 0 0" xyz="0.17 0 0.22"/>
+		<origin rpy="0 0 0" xyz="-${bodyRadius} 0 ${bodyLength/2 + headRadius/2}"/>
 	</joint>
 
 	<leg lr="L" fb="F" tY="1" tX="1" />

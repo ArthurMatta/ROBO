@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find cat_description)/urdf/cat.xacro'"/>
+  <param name="robot_description" command="$(find xacro)/xacro '$(find cat_description)/urdf/cat.xacro'"/>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find cat_control)/config/cat_control.yaml" command="load"/>
@@ -12,13 +12,10 @@
     pkg="controller_manager"
     type="spawner" respawn="false"
     output="screen" ns="/cat"
-    args="
-        --namespace=/cat
-        cat_joint_state_controller
-        cat_leftSpinner_effort_controller
-        cat_rightSpinner_effort_controller
-        cat_leftBWheel_effort_controller
-        cat_rightBWheel_effort_controller"
+    args="cat_joint_state_controller
+
+        cat_leftSpinner_effort_controller cat_rightSpinner_effort_controller
+        cat_leftBWheel_effort_controller cat_rightBWheel_effort_controller"
   />
 
   <!-- convert joint states to TF transforms for rviz, etc -->

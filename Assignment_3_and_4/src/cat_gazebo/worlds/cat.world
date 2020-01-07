@@ -8,10 +8,6 @@
 			<uri>model://sun</uri>
 		</include>
 
-		<!-- ros_control cat launch file -->
-		<include file="$(find cat_control)/launch/cat_control.launch" />
-		<include file="$(find mouse_control)/launch/mouse_control.launch" />
-
 		<!-- Model -->
 	    <model name="cat_octagon">
 	      <include>

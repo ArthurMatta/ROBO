@@ -7,10 +7,10 @@ namespace cat_robot{
 	CatRobot::CatRobot(int argc, char **argv){
 		cout << "Starting Cat Behaviour in C++" << endl;
 
-		leftSpinner_topic = string("/cat/leftSpinner_effort_controller/command");
-		rightSpinner_topic = string("/cat/rightSpinner_effort_controller/command");
-		backleftWheel_topic = string("/cat/leftBWheel_effort_controller/command");
-		backrightWheel_topic = string("/cat/righBtWheel_effort_controller/command");
+		leftSpinner_topic = string("/cat/cat_leftSpinner_effort_controller/command");
+		rightSpinner_topic = string("/cat/cat_rightSpinner_effort_controller/command");
+		backleftWheel_topic = string("/cat/cat_leftBWheel_effort_controller/command");
+		backrightWheel_topic = string("/cat/cat_righBtWheel_effort_controller/command");
 		laser_topic = string("/cat/laser/scan");
 
 		sub = nh.subscribe(laser_topic.c_str(), 1, &CatRobot::callback, this);

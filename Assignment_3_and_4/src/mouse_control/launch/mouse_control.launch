@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find mouse_description)/urdf/mouse.xacro'"/>
+  <param name="robot_description" command="$(find xacro)/xacro '$(find mouse_description)/urdf/mouse.xacro'"/>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find mouse_control)/config/mouse_control.yaml" command="load"/>
@@ -12,13 +12,10 @@
     pkg="controller_manager"
     type="spawner" respawn="false"
     output="screen" ns="/mouse"
-    args="
-        --namespace=/mouse
-        mouse_joint_state_controller
-        mouse_leftSpinner_effort_controller
-        mouse_rightSpinner_effort_controller
-        mouse_leftBWheel_effort_controller
-        mouse_rightBWheel_effort_controller"
+    args="mouse_joint_state_controller
+    
+        mouse_leftSpinner_effort_controller mouse_rightSpinner_effort_controller
+        mouse_leftBWheel_effort_controller mouse_rightBWheel_effort_controller"
   />
 
   <!-- convert joint states to TF transforms for rviz, etc -->
