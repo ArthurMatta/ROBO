@@ -29,6 +29,9 @@ namespace cat_robot{
 		scan = msg;
 		
 		bool top = false, mid = false, bot = false;
+		double min_angle = 1000.0, max_angle = -1000.0;
+		double min_distance = 1000.0;
+		std_msgs::Float64 message, left_msg, right_msg;
 
 		for(int i = 0 ; i < scan.points.size() ; i++){
 			double x = scan.points[i].x;
@@ -45,22 +48,41 @@ namespace cat_robot{
 			if(i < 199){ // Ignorar sensor 199 propositadamente
 				if(dist < minBotDist - 0.01){ // Remover 0.01 devido a inprecisoes do sensor
 					bot = true;
-					CatRobot::printCollision(dist, angle);
+					if (angle < min_angle) {
+						min_angle = angle;
+					}
+					if (angle > max_angle) {
+						max_angle = angle;
+					}
+					if (dist < min_distance) {
+						min_distance = dist;
+					}
+					//CatRobot::printCollision(dist, angle);
 				}
 			}
 			else if (i >= 200 && i < 399){ // Ignorar sensor 399 propositadamente
 				if(dist < minMidDist - 0.01){
 					mid = true;
-					CatRobot::printCollision(dist, angle);
+					if (angle < min_angle) {
+						min_angle = angle;
+					}
+					if (angle > max_angle) {
+						max_angle = angle;
+					}
+					if (dist < min_distance) {
+						min_distance = dist;
+					}
+					//CatRobot::printCollision(dist, angle);
 				}
 			}
 			else if (i >= 400 && i < 599){ // Ignorar sensor 599 propositadamente
 				if(dist < minTopDist - 0.01){
 					top = true;
-					CatRobot::printCollision(dist, angle);
+					//CatRobot::printCollision(dist, angle);
 				}
 			}
 		}
+
 		string final;
 		if(bot || mid || top){
 			if(bot)
@@ -70,6 +92,13 @@ namespace cat_robot{
 			if(top)
 				final.append("Wall Detected!");
 			cout << final << endl;
+
+			cout << fixed << setprecision(0) << "Angle: [" << min_angle << "°, " << max_angle << "°]" << endl;
+			cout << fixed << setprecision(2) << "Distance: " << min_distance << "m" << endl;
+
+			if (min_distance < 0.35) {
+				cout << "CATCHED THE MOUSE!" << endl;
+			}
 		}
 		else{
 			cout << "All Clear" << endl;
@@ -78,16 +107,28 @@ namespace cat_robot{
 		mid = false;
 		top = false;
 
-		std_msgs::Float64 message;
+
+		if (((min_angle + max_angle)/2) > 90) {
+			left_msg.data = -50;
+			right_msg.data = -50;
+		} else if (((min_angle + max_angle)/2) < 90) {
+			left_msg.data = 50;
+			right_msg.data = 50;
+		} else {
+			left_msg.data = 0;
+			right_msg.data = 0;
+		}
+
+		
 		message.data = 50;
 
 		ros::Rate(200);
-		//cout << "Publishing Message" << endl;
+		cout << "Publishing Message" << endl;
 
-		//backL.publish(message);
-		//backR.publish(message);
-		//spinL.publish(message);
-		//spinR.publish(message);
+		backL.publish(message);
+		backR.publish(message);
+		spinL.publish(left_msg);
+		spinR.publish(right_msg);
 
 		ros::spinOnce();               
 	}
