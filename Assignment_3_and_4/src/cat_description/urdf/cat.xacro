@@ -77,8 +77,8 @@
 	<leg lr="L" fb="B" tY="1" tX="-1" />
 	<leg lr="R" fb="B" tY="-1" tX="-1" />
 
-	<spinner lr="L" fb="F" tY="1" tX="1" />
-	<spinner lr="R" fb="F" tY="1" tX="1" />
+	<spinnerL R="0.5"/>
+	<spinnerR R="0.5"/>
 
 	<wheel lr="L" fb="F"/>
 	<wheel lr="R" fb="F"/>

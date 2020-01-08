@@ -76,9 +76,9 @@
     </joint>
   </xacro:macro>
 
-  <xacro:macro name="spinner" params="lr fb tY tX">
+  <xacro:macro name="spinnerL" params="R">
 
-    <link name="spinner_${lr}${fb}">
+    <link name="spinner_LF">
       <collision>
         <geometry>
           <cylinder length="${spinnerLength}" radius="${spinnerRadius}" />
@@ -98,24 +98,71 @@
       </inertial>
     </link>
 
-    <gazebo reference="leg_${lr}${fb}">
+    <gazebo reference="leg_LF">
       <material>Gazebo/Grey</material>
     </gazebo>
 
-    <joint name="leg_${lr}${fb}_spinner_joint" type="revolute">
-      <parent link="leg_${lr}${fb}"/>
-      <child link="spinner_${lr}${fb}"/>
-      <limit lower="-0.7" upper="0.7" effort="1000" velocity="1000"/> 
+    <joint name="leg_LF_spinner_joint" type="revolute">
+      <parent link="leg_LF"/>
+      <child link="spinner_LF"/>
+      <limit lower="-${atan((4*bodyLength/5)/(R + bodyRadius/2))}" upper="${atan((4*bodyLength/5)/(R - bodyRadius/2))}" effort="1000" velocity="1000"/> 
       <origin rpy="0 0 0" xyz="0 0 -${legLength/2}"/>
       <axis xyz="0 0 1"/>
     </joint>
 
-    <transmission name="trans_spin_${lr}${fb}">
+    <transmission name="trans_spin_LF">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="leg_${lr}${fb}_spinner_joint">
+      <joint name="leg_LF_spinner_joint">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
-      <actuator name="motor_spin_${lr}${fb}">
+      <actuator name="motor_spin_LF">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  </xacro:macro>
+
+  <xacro:macro name="spinnerR" params="R">
+
+    <link name="spinner_RF">
+      <collision>
+        <geometry>
+          <cylinder length="${spinnerLength}" radius="${spinnerRadius}" />
+        </geometry>
+      </collision>
+
+      <visual>
+        <geometry>
+          <cylinder length="${spinnerLength}" radius="${spinnerRadius}" />
+        </geometry>
+        <material name="grey" />
+      </visual>
+
+      <inertial>
+        <mass value="${spinnerMass}"/>
+        <cylinder_inertia m="${spinnerMass}" r="${spinnerRadius}" h="${spinnerLength}"/>
+      </inertial>
+    </link>
+
+    <gazebo reference="leg_RF">
+      <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <joint name="leg_RF_spinner_joint" type="revolute">
+      <parent link="leg_RF"/>
+      <child link="spinner_RF"/>
+      <limit lower="-${atan((4*bodyLength/5)/(R - bodyRadius/2))}" upper="${atan((4*bodyLength/5)/(R + bodyRadius/2))}" effort="1000" velocity="1000"/> 
+      <origin rpy="0 0 0" xyz="0 0 -${legLength/2}"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <transmission name="trans_spin_RF">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="leg_RF_spinner_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor_spin_RF">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
