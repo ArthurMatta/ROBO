@@ -44,43 +44,89 @@ catkin_ws/
          materials/
          meshes/
          urdf/
+            cat.gazebo
+            cat.xacro
+            macros.xacro
+            materials.xacro
+         CMakeLists.txt
+         package.xml
       cat_gazebo/
          launch/
+            cat_world.launch
          materials/
          models/
+            cat_home/
+               model.config
+            cat_octagon/
+               model.config
+            cat_world/
+               model.config
          plugins/
          worlds/
+            cat.world
       cat_control/
          config/
+            cat_control.yaml
          launch/   
+            cat_control.launch
+         CMakeLists.txt
+         package.xml
       cat_training/
          config/
+            cat_params.yaml
          launch/
+            start_training.launch
          scripts/
-         ...
+            cat_env.py
+            controllers_connection.py
+            gazebo_connection.py
+            qlearn.py
+            start_training.py
+         CMakeLists.txt
+         package.xml
+      cat_behaviour/
+         src/
+            cat_behaviour.cpp
+            cat_behaviour.h
+            main.cpp
+         CMakeLists.txt
+         package.xml
       CMakeLists.txt
 ```
 
 ## Running the Program
 
-- Remove the devel/ and build/ folders
-```
+- Open a terminal
+
+- Move to the folder where you downloaded the files (if you followed this tutorial, it should be catkin_ws)
+```bash
 cd <path_to_your_catkin_ws>/catkin_ws
+```
+
+- Remove the devel/ and build/ folders
+```bash
 rm -r build/ devel/
 ```
 
-- Recompiled your working space and sourced the setup file:
-```
+- Recompiled your working space and sourced the setup file
+```bash
 catkin_make
 source devel/setup.bash
 ```
 
-- Execute the following command to initialize the world with the cat robot in gazebo:
+- Execute the following command to initialize the world with the robots in gazebo
 ```
 roslaunch cat_gazebo cat_world.launch
 ```
 
+- Open another terminal and execute the following command to initialize the cat behaviour
+```
+source devel/setup.bash
+rosrun cat_behaviour cat_behaviour_node
+
+
 ## Training the Robot
+*Note:* This section is obsolete.
 
 - After launching the simulation with the previous command, execute the following command in a second terminal:
 ```
