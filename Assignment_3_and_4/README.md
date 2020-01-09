@@ -123,6 +123,7 @@ roslaunch cat_gazebo cat_world.launch
 ```
 source devel/setup.bash
 rosrun cat_behaviour cat_behaviour_node
+```
 
 
 ## Training the Robot
