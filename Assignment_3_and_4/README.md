@@ -127,7 +127,7 @@ rosrun cat_behaviour cat_behaviour_node
 
 
 ## Training the Robot
-**Note:** This section is obsolete.
+**Note:** This section is deprecated.
 
 - After launching the simulation with the previous command, execute the following command in a second terminal:
 ```
